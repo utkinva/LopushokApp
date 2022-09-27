@@ -5,7 +5,6 @@ namespace LopushokApp.Models
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
-    using System.Drawing;
 
     [Table("Product")]
     public partial class Product
@@ -40,7 +39,6 @@ namespace LopushokApp.Models
         public int? ProductionWorkshopNumber { get; set; }
 
         public decimal MinCostForAgent { get; set; }
-
         public decimal Cost
         {
             get
@@ -58,6 +56,27 @@ namespace LopushokApp.Models
                 return cost;
             }
         }
+
+        public decimal Sales
+        {
+            get
+            {
+                decimal salesSum = 0;
+
+                foreach (ProductSale sale in ProductSale)
+                {
+                    if (sale.ProductID == ID
+                        && sale.SaleDate.Month == DateTime.Now.Month
+                        && sale.SaleDate.Year == DateTime.Now.Year)
+                    {
+                        salesSum += sale.ProductCount * sale.Product.MinCostForAgent;
+                    }
+                }
+
+                return salesSum;
+            }
+        }
+
 
         public virtual ProductType ProductType { get; set; }
 

@@ -24,6 +24,7 @@ namespace LopushokApp.View.PartialView
             articleLabel.Text = product.ArticleNumber;
             costLabel.Text = $"{product.Cost} руб.";
             logoPictureBox.ImageLocation = product.Image;
+            idLabel.Text = product.ID.ToString();
 
             string materials = "Материалы: ";
 
@@ -33,6 +34,9 @@ namespace LopushokApp.View.PartialView
             }
 
             materialsLabel.Text = materials.Substring(0, materials.Length - 2);
+
+            if (product.Sales <= 0)
+                titleTypeLabel.BackColor = Color.FromArgb(255, 114, 118);
         }
     }
 }

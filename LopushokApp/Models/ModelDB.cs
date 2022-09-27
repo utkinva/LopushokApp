@@ -67,11 +67,6 @@ namespace LopushokApp.Models
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Material>()
-                .HasMany(e => e.ProductMaterial)
-                .WithRequired(e => e.Material)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<Material>()
                 .HasMany(e => e.Supplier)
                 .WithMany(e => e.Material)
                 .Map(m => m.ToTable("MaterialSupplier").MapLeftKey("MaterialID").MapRightKey("SupplierID"));
@@ -87,11 +82,6 @@ namespace LopushokApp.Models
 
             modelBuilder.Entity<Product>()
                 .HasMany(e => e.ProductCostHistory)
-                .WithRequired(e => e.Product)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<Product>()
-                .HasMany(e => e.ProductMaterial)
                 .WithRequired(e => e.Product)
                 .WillCascadeOnDelete(false);
 
