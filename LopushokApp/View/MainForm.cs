@@ -127,6 +127,7 @@ namespace LopushokApp
                     .ToList();
             #endregion
 
+            selectedCards.Clear();
             flowLayoutPanel.Controls.Clear();
             GenerateProductCards(updatedList);
         }
