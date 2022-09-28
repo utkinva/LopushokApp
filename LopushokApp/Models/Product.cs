@@ -47,10 +47,7 @@ namespace LopushokApp.Models
 
                 foreach (var material in ProductMaterial)
                 {
-                    if (material.ProductID == ID)
-                    {
-                        cost += (decimal.Parse(material.Count.ToString()) * material.Material.Cost);
-                    }
+                    cost += (decimal.Parse(material.Count.ToString()) * material.Material.Cost);
                 }
 
                 return cost;

@@ -4,12 +4,14 @@ using LopushokApp.Utilities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Runtime.Remoting.Contexts;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -35,6 +37,9 @@ namespace LopushokApp.View
                 {
                     Image = @"..\..\Resources\picture.png"
                 };
+                addMaterialBtn.Enabled = false;
+                deleteMaterialBtn.Enabled = false;
+                deleteBtn.Enabled = false;
             }
 
 
@@ -45,9 +50,6 @@ namespace LopushokApp.View
 
             productTypeBindingSource.DataSource = DBContext.Context.ProductType.ToList();
             materialBindingSource.DataSource = DBContext.Context.Material.ToList();
-
-            
-
         }
         private void AddEditForm_Load(object sender, EventArgs e)
         {
@@ -61,12 +63,12 @@ namespace LopushokApp.View
                 {
                     imagePictureBox.ImageLocation = product.Image;
                 }
+
                 productBindingSource.Add(product);
-                            GetMaterialList();
+                GetMaterialList();
             }
             else
             {
-
                 productBindingSource.AddNew();
             }
 
@@ -116,9 +118,24 @@ namespace LopushokApp.View
 
         private void saveBtn_Click(object sender, EventArgs e)
         {
-            var findArticle = DBContext.Context.Product.FirstOrDefault(x => x.ArticleNumber.ToString() == product.ArticleNumber.ToString()) ?? null;
+            StringBuilder errors = new StringBuilder();
+
+            if (String.IsNullOrWhiteSpace(titleTextBox.Text))
+                errors.AppendLine("Наименование");
+            if (productTypeIDComboBox.SelectedItem == null)
+                errors.AppendLine("Тип продукции");
+            if (String.IsNullOrWhiteSpace(articleNumberTextBox.Text))
+                errors.AppendLine("Артикль");
+
+            if (errors.Length > 0)
+            {
+                MessageBox.Show($"Необходимо заполнить следующие поля:\n{errors}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             if (product.ID == 0
-                && findArticle != null)
+                && DBContext.Context.Product
+                .FirstOrDefault(x => x.ArticleNumber.ToString() == product.ArticleNumber.ToString()) != null)
             {
                 MessageBox.Show($"Продукт с таким артиклем уже существует", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
