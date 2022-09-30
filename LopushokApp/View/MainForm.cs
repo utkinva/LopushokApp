@@ -19,6 +19,8 @@ namespace LopushokApp
     {
         List<Product> products;
         List<ProductCard> selectedCards = new List<ProductCard>();
+        int nPage = 0;
+        int nPageMax = 0;
         public MainForm()
         {
             InitializeComponent();
@@ -32,11 +34,20 @@ namespace LopushokApp
 
             products = DBContext.Context.Product.ToList();
 
-            GenerateProductCards(products);
+            ApplyFilters();
         }
-
-        private void GenerateProductCards(List<Product> products)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="products">Список продуктов из таблицы базы данных</param>
+        /// <param name="nPage">Текущая страница</param>
+        /// <param name="pageSize">Количество элементов на одной странице</param>
+        private void GenerateProductCards(List<Product> products, int nPage, int pageSize)
         {
+            nPageMax = (int)products.Count / 20 < 1 ? 1 : (int)products.Count / 20;
+            products = products.Skip(nPage * pageSize).Take(pageSize).ToList();
+            pagesLbl.Text = $"{nPage + 1} из {nPageMax}";
+
             flowLayoutPanel.Controls.Clear();
             foreach (Product product in products)
             {
@@ -129,7 +140,7 @@ namespace LopushokApp
 
             selectedCards.Clear();
             flowLayoutPanel.Controls.Clear();
-            GenerateProductCards(updatedList);
+            GenerateProductCards(updatedList, nPage, 20);
         }
         /// <summary>
         /// Вызывает метод ApplyFilters для применения выбранных фильтров
@@ -138,7 +149,9 @@ namespace LopushokApp
         /// <param name="e"></param>
         private void TriggerFilters(object sender, EventArgs e)
         {
+            nPage = 0;
             ApplyFilters();
+
         }
 
         private void searchTextBox_Leave(object sender, EventArgs e)
@@ -162,7 +175,7 @@ namespace LopushokApp
                 if (dr == DialogResult.OK)
                 {
                     selectedCards.Clear();
-                    GenerateProductCards(products);
+                    ApplyFilters();
                 }
             }
             else
@@ -180,6 +193,24 @@ namespace LopushokApp
             if (dr == DialogResult.OK)
             {
                 selectedCards.Clear();
+                ApplyFilters();
+            }
+        }
+
+        private void nextPageLbl_Click(object sender, EventArgs e)
+        {
+            if (nPage + 1 < nPageMax)
+            {
+                nPage++;
+                ApplyFilters();
+            }
+        }
+
+        private void prevPageLbl_Click(object sender, EventArgs e)
+        {
+            if (nPage > 0)
+            {
+                nPage--;
                 ApplyFilters();
             }
         }

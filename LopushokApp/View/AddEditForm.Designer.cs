@@ -38,8 +38,10 @@
             System.Windows.Forms.Label titleLabel;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddEditForm));
             this.articleNumberTextBox = new System.Windows.Forms.TextBox();
+            this.productBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.descriptionTextBox = new System.Windows.Forms.TextBox();
             this.productTypeIDComboBox = new System.Windows.Forms.ComboBox();
+            this.productTypeBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.titleTextBox = new System.Windows.Forms.TextBox();
             this.minCostForAgentNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.productionPersonCountNumericUpDown = new System.Windows.Forms.NumericUpDown();
@@ -49,15 +51,13 @@
             this.deleteBtn = new System.Windows.Forms.Button();
             this.changeImageBtn = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.addMaterialBtn = new System.Windows.Forms.Button();
-            this.deleteMaterialBtn = new System.Windows.Forms.Button();
-            this.imagePictureBox = new System.Windows.Forms.PictureBox();
-            this.productBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.materialIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.materialBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.countDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productMaterialBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.productTypeBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.addMaterialBtn = new System.Windows.Forms.Button();
+            this.deleteMaterialBtn = new System.Windows.Forms.Button();
+            this.imagePictureBox = new System.Windows.Forms.PictureBox();
             articleNumberLabel = new System.Windows.Forms.Label();
             descriptionLabel = new System.Windows.Forms.Label();
             minCostForAgentLabel = new System.Windows.Forms.Label();
@@ -65,15 +65,15 @@
             productionWorkshopNumberLabel = new System.Windows.Forms.Label();
             productTypeIDLabel = new System.Windows.Forms.Label();
             titleLabel = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.productBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.productTypeBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.minCostForAgentNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.productionPersonCountNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.productionWorkshopNumberNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.imagePictureBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.productBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.materialBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.productMaterialBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.productTypeBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imagePictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // articleNumberLabel
@@ -163,6 +163,10 @@
             this.articleNumberTextBox.Size = new System.Drawing.Size(258, 43);
             this.articleNumberTextBox.TabIndex = 2;
             // 
+            // productBindingSource
+            // 
+            this.productBindingSource.DataSource = typeof(LopushokApp.Models.Product);
+            // 
             // descriptionTextBox
             // 
             this.descriptionTextBox.BackColor = System.Drawing.Color.White;
@@ -173,6 +177,7 @@
             this.descriptionTextBox.Name = "descriptionTextBox";
             this.descriptionTextBox.Size = new System.Drawing.Size(532, 95);
             this.descriptionTextBox.TabIndex = 4;
+            this.descriptionTextBox.Text = " ";
             // 
             // productTypeIDComboBox
             // 
@@ -188,6 +193,10 @@
             this.productTypeIDComboBox.Size = new System.Drawing.Size(258, 47);
             this.productTypeIDComboBox.TabIndex = 14;
             this.productTypeIDComboBox.ValueMember = "ID";
+            // 
+            // productTypeBindingSource
+            // 
+            this.productTypeBindingSource.DataSource = typeof(LopushokApp.Models.ProductType);
             // 
             // titleTextBox
             // 
@@ -296,6 +305,37 @@
             this.dataGridView1.Size = new System.Drawing.Size(505, 358);
             this.dataGridView1.TabIndex = 22;
             // 
+            // materialIDDataGridViewTextBoxColumn
+            // 
+            this.materialIDDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.materialIDDataGridViewTextBoxColumn.DataPropertyName = "MaterialID";
+            this.materialIDDataGridViewTextBoxColumn.DataSource = this.materialBindingSource;
+            this.materialIDDataGridViewTextBoxColumn.DisplayMember = "Title";
+            this.materialIDDataGridViewTextBoxColumn.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.Nothing;
+            this.materialIDDataGridViewTextBoxColumn.HeaderText = "Наименование";
+            this.materialIDDataGridViewTextBoxColumn.Name = "materialIDDataGridViewTextBoxColumn";
+            this.materialIDDataGridViewTextBoxColumn.ReadOnly = true;
+            this.materialIDDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.materialIDDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.materialIDDataGridViewTextBoxColumn.ValueMember = "ID";
+            // 
+            // materialBindingSource
+            // 
+            this.materialBindingSource.DataSource = typeof(LopushokApp.Models.Material);
+            // 
+            // countDataGridViewTextBoxColumn
+            // 
+            this.countDataGridViewTextBoxColumn.DataPropertyName = "Count";
+            this.countDataGridViewTextBoxColumn.HeaderText = "Количество";
+            this.countDataGridViewTextBoxColumn.MinimumWidth = 70;
+            this.countDataGridViewTextBoxColumn.Name = "countDataGridViewTextBoxColumn";
+            this.countDataGridViewTextBoxColumn.ReadOnly = true;
+            this.countDataGridViewTextBoxColumn.Width = 70;
+            // 
+            // productMaterialBindingSource
+            // 
+            this.productMaterialBindingSource.DataSource = typeof(LopushokApp.Models.ProductMaterial);
+            // 
             // addMaterialBtn
             // 
             this.addMaterialBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(204)))), ((int)(((byte)(118)))));
@@ -332,45 +372,6 @@
             this.imagePictureBox.TabIndex = 23;
             this.imagePictureBox.TabStop = false;
             // 
-            // productBindingSource
-            // 
-            this.productBindingSource.DataSource = typeof(LopushokApp.Models.Product);
-            // 
-            // materialIDDataGridViewTextBoxColumn
-            // 
-            this.materialIDDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.materialIDDataGridViewTextBoxColumn.DataPropertyName = "MaterialID";
-            this.materialIDDataGridViewTextBoxColumn.DataSource = this.materialBindingSource;
-            this.materialIDDataGridViewTextBoxColumn.DisplayMember = "Title";
-            this.materialIDDataGridViewTextBoxColumn.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.Nothing;
-            this.materialIDDataGridViewTextBoxColumn.HeaderText = "Наименование";
-            this.materialIDDataGridViewTextBoxColumn.Name = "materialIDDataGridViewTextBoxColumn";
-            this.materialIDDataGridViewTextBoxColumn.ReadOnly = true;
-            this.materialIDDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.materialIDDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.materialIDDataGridViewTextBoxColumn.ValueMember = "ID";
-            // 
-            // materialBindingSource
-            // 
-            this.materialBindingSource.DataSource = typeof(LopushokApp.Models.Material);
-            // 
-            // countDataGridViewTextBoxColumn
-            // 
-            this.countDataGridViewTextBoxColumn.DataPropertyName = "Count";
-            this.countDataGridViewTextBoxColumn.HeaderText = "Количество";
-            this.countDataGridViewTextBoxColumn.MinimumWidth = 70;
-            this.countDataGridViewTextBoxColumn.Name = "countDataGridViewTextBoxColumn";
-            this.countDataGridViewTextBoxColumn.ReadOnly = true;
-            this.countDataGridViewTextBoxColumn.Width = 70;
-            // 
-            // productMaterialBindingSource
-            // 
-            this.productMaterialBindingSource.DataSource = typeof(LopushokApp.Models.ProductMaterial);
-            // 
-            // productTypeBindingSource
-            // 
-            this.productTypeBindingSource.DataSource = typeof(LopushokApp.Models.ProductType);
-            // 
             // AddEditForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -405,15 +406,15 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Лопушок";
             this.Load += new System.EventHandler(this.AddEditForm_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.productBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.productTypeBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.minCostForAgentNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.productionPersonCountNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.productionWorkshopNumberNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.imagePictureBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.productBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.materialBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.productMaterialBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.productTypeBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imagePictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
